@@ -6,11 +6,12 @@ public class Midfielder extends Position {
 	
 	//---------------------- Private ----------------------\\
 	
-
+	
 	//------------------- Public interface -------------------\\
 	
 	public Midfielder(){
 		maxPlayersByTeam = 4;
+		goalsRatio = 1;
 	}
 
 	@Override
