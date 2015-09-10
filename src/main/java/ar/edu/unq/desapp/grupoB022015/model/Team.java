@@ -4,11 +4,12 @@ import java.util.List;
 
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.CantAddPlayerException;
 
-public class Team {
+public class Team extends Persistible{
 
 	//---------------------- Private ----------------------\\
 	
 	private Players	players;
+	private Integer roundPoints = 0;
 		
 	//------------------- Public interface -------------------\\
 	
@@ -18,6 +19,7 @@ public class Team {
 	
 	public void addPlayer(Player aPlayer) throws CantAddPlayerException {
 		players.addPlayer(aPlayer);
+		aPlayer.addTeam(this);
 	}
 	
 	public void removePlayer(Player aPlayer){
@@ -26,6 +28,14 @@ public class Team {
 
 	public List<Player> allPlayers() {
 		return players.all();
+	}
+	
+	public void addPlayerPoints(Integer points){
+		roundPoints = roundPoints + points;
+	}
+	
+	public void resetRoundPoints(){
+		roundPoints = 0;
 	}
 
 }

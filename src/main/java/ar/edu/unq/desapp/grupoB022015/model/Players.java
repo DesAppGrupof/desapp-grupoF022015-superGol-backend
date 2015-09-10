@@ -17,12 +17,12 @@ public class Players {
 		if(players.size() == 11)
 			throw new NotAllowedMoreThanElevenPlayersException();
 		
-		Integer cantSamePositionPlayers = 0;
+		Integer samePositionPlayers = 0;
 		for(Player anyPlayer: players){
 			if(anyPlayer.hasPosition(searchedPosition))
-				cantSamePositionPlayers++;
+				samePositionPlayers++;
 		}
-		if (cantSamePositionPlayers == searchedPosition.getMaxPlayersByTeam())
+		if (samePositionPlayers == searchedPosition.getMaxPlayersByTeam())
 			searchedPosition.throwCantAddPlayerException();
 	}
 	

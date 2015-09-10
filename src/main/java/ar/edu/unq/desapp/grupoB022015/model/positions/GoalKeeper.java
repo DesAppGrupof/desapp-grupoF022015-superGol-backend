@@ -6,13 +6,21 @@ public class GoalKeeper extends Position{
 	
 	//---------------------- Private ----------------------\\
 	
-
+	
 	//------------------- Public interface -------------------\\
 		
 	public GoalKeeper(){
 		maxPlayersByTeam = 1;
 	}
 
+	@Override
+	public Integer pointsFor(Integer goals){
+		if (goals == 0)
+			return 3;
+		else
+			return 0;
+	}
+	
 	@Override
 	public void throwCantAddPlayerException() throws NotAllowedMoreThanOneGoalkeeperException {
 		throw new NotAllowedMoreThanOneGoalkeeperException();

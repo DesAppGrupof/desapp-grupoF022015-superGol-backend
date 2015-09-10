@@ -1,15 +1,34 @@
 package ar.edu.unq.desapp.grupoB022015.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ar.edu.unq.desapp.grupoB022015.model.positions.Position;
 
 public class Player extends Persistible{
 
 	//---------------------- Private ----------------------\\
 	
+	private String name;
 	private Position position;
+	private List<Team> teams = new ArrayList<Team>();
+	private Integer goalsInRound = 0;
+	
+	private void updateTeams(){
+		for(Team t : teams)
+			t.addPlayerPoints(position.pointsFor(goalsInRound));
+	}
 	
 	//------------------- Public interface -------------------\\
 
+	public String getName(){
+		return name;
+	}
+	
+	public void setName(String aName){
+		name = aName;
+	}
+	
 	public Position getPosition() {
 		return position;
 	}
@@ -21,7 +40,23 @@ public class Player extends Persistible{
 	public boolean hasPosition(Position unaPosition) {
 		return position.equals(unaPosition);
 	}
+	
+	public Integer getGoalsInRound() {
+		return goalsInRound;
+	}
 
+	public void setGoalsInRound(Integer goalsInRound) {
+		this.goalsInRound = goalsInRound;
+		updateTeams();
+	}
+
+	public void addTeam(Team aTeam){
+		teams.add(aTeam);
+	}
+	
+	
+	//------------------- Hash & Equals -------------------\\
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

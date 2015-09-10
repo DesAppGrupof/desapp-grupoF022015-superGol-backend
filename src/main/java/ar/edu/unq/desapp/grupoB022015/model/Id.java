@@ -7,6 +7,9 @@ public final class Id {
 	public Id(Integer aNumber){
 		number = aNumber;
 	}
+	
+	//------------------- Hash & Equals -------------------\\
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -31,6 +34,8 @@ public final class Id {
 			return false;
 		return true;
 	}
-	
-	
+
+	public Integer number() {
+		return number;
+	}	
 }
