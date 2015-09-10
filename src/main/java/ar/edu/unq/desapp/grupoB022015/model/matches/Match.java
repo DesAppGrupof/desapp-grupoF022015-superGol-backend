@@ -19,6 +19,13 @@ public class Match {
 		score0 = scoreTeam0;
 		score1 = scoreTeam1;
 	}
-	
+
+	public Team getTeam0() {
+		return team0;
+	}
+
+	public Team getTeam1() {
+		return team1;
+	}
 
 }

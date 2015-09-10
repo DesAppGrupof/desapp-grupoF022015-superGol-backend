@@ -34,20 +34,28 @@ public class League {
 	}
 	
 	protected void arrangeRounds() {
-		int qtyTeams = getTeams().size();
+		List<Team> teams = getTeams();
+		int qtyTeams = teams.size();
 		int qtyMatches = (qtyTeams + 1) / 2;
-		boolean dummyTeam = qtyTeams % 2 == 0;
-		int qtyRounds = dummyTeam ? qtyTeams : qtyTeams - 1;
-        Collections.shuffle(getTeams(), new Random());
+		boolean oddTeams = qtyTeams % 2 != 0;
+		int qtyRounds = oddTeams ? qtyTeams : qtyTeams - 1;
+        Collections.shuffle(teams, new Random());
         
-        List<Match> matches = new ArrayList<>(qtyMatches);
-//		if (dummyTeam) {
-//			getTeams().add(new Team());
-//		}
-		for (int round = 0; round < qtyRounds; round++){ 
-			for (int match = dummyTeam ? 1 : 0; match < qtyMatches; match++) {
-//				matches.add(new Match(team0, team1));
+		for (int round = 0; round < qtyRounds; round++) {
+	        List<Match> matches = new ArrayList<>(qtyMatches);
+			int team0 = oddTeams ? 1 : 0;
+			int team1 = qtyTeams - 1;
+			if (!oddTeams && round % 2 != 0) {
+				matches.add(new Match(teams.get(team1--), teams.get(team0++)));
 			}
+			while (team0 < qtyMatches) {
+				matches.add(new Match(teams.get(team0++), teams.get(team1--)));
+			}
+			getRounds().add(new Round(matches));
+			
+			Team lastTeam = teams.get(teams.size() - 1);
+			teams.remove(teams.size() - 1);
+			teams.add(oddTeams ? 0 : 1, lastTeam);
 		}
 	}
 	

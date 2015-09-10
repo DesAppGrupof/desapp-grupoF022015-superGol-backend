@@ -1,12 +1,16 @@
 package ar.edu.unq.desapp.grupoB022015.model.matches;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import ar.edu.unq.desapp.grupoB022015.model.Team;
-import org.junit.Assert;
 
 public class LeagueTest {
 
@@ -16,6 +20,16 @@ public class LeagueTest {
 		for (int i = 0; i < qtyPlayers; i++) {
 			league.addTeam(mock(Team.class));
 		}
+	}
+	
+	protected List<Team> addAndGetTeamsToLeague(int qtyPlayers) {
+		List<Team> teams = new ArrayList<>();
+		for (int i = 0; i < qtyPlayers; i++) {
+			Team team = mock(Team.class);
+			teams.add(team);
+			league.addTeam(team);
+		}
+		return teams;
 	}
 
 	@Before
@@ -93,20 +107,6 @@ public class LeagueTest {
 		league.init();
 	}
 
-	@Test
-	public void init() {
-		Assert.assertTrue(!league.getRounds().isEmpty());
-		Round round = mock(Round.class);
-		league.getRounds().clear();
-		league.rounds.add(round);
-
-		addTeamsToLeague(league.getMinTeams());
-		Assert.assertTrue(league.canInit());
-		league.init();
-
-		verify(round).init();
-	}
-
 	@Test(expected = RuntimeException.class)
 	public void init_afterInited() {
 		league.init();
@@ -120,6 +120,94 @@ public class LeagueTest {
 		addTeamsToLeague(league.getMinTeams());
 		league.init();
 		Assert.assertTrue(league.isInited());
+	}
+	
+	@Test
+	public void arrangeRounds_EvenTeams_RoundsAndMatchesQty() {
+		int qtyTeams = 8;
+		addTeamsToLeague(qtyTeams);
+		league.arrangeRounds();
+		List<Round> rounds = league.getRounds();
+		Assert.assertEquals(qtyTeams - 1, rounds.size());
+		for (int i = 0; i < rounds.size(); i++) {
+			Assert.assertEquals(qtyTeams / 2, rounds.get(i).getMatches().size());
+		}
+	}
+
+	@Test
+	public void arrangeRounds_OddTeams_RoundsAndMatchesQty() {
+		int qtyTeams = 11;
+		addTeamsToLeague(qtyTeams);
+		league.arrangeRounds();
+		List<Round> rounds = league.getRounds();
+		Assert.assertEquals(qtyTeams, rounds.size());
+		for (int i = 0; i < rounds.size(); i++) {
+			Assert.assertEquals(qtyTeams / 2, rounds.get(i).getMatches().size());
+		}
+	}
+	
+	
+	private void arrangeRounds_TeamsNotRepeated(int qtyTeams) {
+		List<Team> teams = addAndGetTeamsToLeague(qtyTeams);
+		league.arrangeRounds();
+		List<Round> rounds = league.getRounds();
+		for (int r = 0; r < rounds.size(); r++) {
+			Round round = rounds.get(r);
+			List<Team> teamsAux = new ArrayList<>();
+			teamsAux.addAll(teams);
+			for (int m = 0; m < round.getMatches().size(); m++) {
+				Match match = round.getMatches().get(m);
+				Team team0 = match.getTeam0();
+				Team team1 = match.getTeam1();
+				Assert.assertTrue(teamsAux.contains(team0));
+				Assert.assertTrue(teamsAux.contains(team1));
+				teamsAux.remove(team0);
+				teamsAux.remove(team1);
+			}
+		}
+	}
+	
+	@Test
+	public void arrangeRounds_EvenTeams_TeamsNotRepeated() {
+		arrangeRounds_TeamsNotRepeated(10);
+	}
+	
+	@Test
+	public void arrangeRounds_OddTeams_TeamsNotRepeated() {
+		arrangeRounds_TeamsNotRepeated(13);
+	}
+	
+	private void arrangeRounds_TeamsWellDistributed(int qtyTeams) {
+		addTeamsToLeague(qtyTeams);
+		league.arrangeRounds();
+		List<Team> teams = league.getTeams();
+		List<Round> rounds = league.getRounds();
+		List<Point> matches = new ArrayList<>();
+		for (int r = 0; r < rounds.size(); r++) {
+			Round round = rounds.get(r);
+			for (int m = 0; m < round.getMatches().size(); m++) {
+				Match match = round.getMatches().get(m);
+				Team team0 = match.getTeam0();
+				Team team1 = match.getTeam1();
+				int team0Pos = teams.indexOf(team0);
+				int team1Pos = teams.indexOf(team1);
+				Point point = new Point(team0Pos, team1Pos);
+				Point point2 = new Point(team1Pos, team0Pos);
+				Assert.assertTrue(!matches.contains(point));
+				Assert.assertTrue(!matches.contains(point2));
+				matches.add(new Point(team0Pos, team1Pos));
+			}
+		}
+	}
+	
+	@Test
+	public void arrangeRounds_EvenTeams_TeamsWellDistributed() {
+		arrangeRounds_TeamsWellDistributed(12);
+	}
+	
+	@Test
+	public void arrangeRounds_OddTeams_TeamsWellDistributed() {
+		arrangeRounds_TeamsWellDistributed(11);
 	}
 
 }

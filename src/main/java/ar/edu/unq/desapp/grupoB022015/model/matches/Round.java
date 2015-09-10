@@ -10,5 +10,9 @@ public class Round {
 	public Round(List<Match> matches) {
 		this.matches = matches;
 	}
+	
+	public List<Match> getMatches() {
+		return matches;
+	}
 
 }
