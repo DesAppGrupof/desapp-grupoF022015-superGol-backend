@@ -19,6 +19,10 @@ public class Match {
 		score0 = scoreTeam0;
 		score1 = scoreTeam1;
 	}
+	
+	public Team getWinner() {
+		return score0 > score1 ? team0 : score0 < score1 ? team1 : null;
+	}
 
 	public Team getTeam0() {
 		return team0;
