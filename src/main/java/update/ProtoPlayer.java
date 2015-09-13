@@ -6,12 +6,10 @@ import persistence.PlayerHome;
 public class ProtoPlayer {
 
 	Id id;
-	String position;
 	Integer goals;
 	
-	public ProtoPlayer(Id anId, String aPosition, Integer someGoals) {
+	public ProtoPlayer(Id anId, Integer someGoals) {
 		id = anId;
-		position = aPosition;
 		goals = someGoals;
 	}
 

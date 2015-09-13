@@ -3,6 +3,7 @@ package update.csvReaders;
 import org.joda.time.DateTime;
 
 import ar.edu.unq.desapp.grupoB022015.model.Id;
+import ar.edu.unq.desapp.grupoB022015.model.positions.Position;
 import update.Update;
 import update.UpdateManager;
 
@@ -33,7 +34,12 @@ public class UpdateCSVReader extends CSVReader {
 	@Override
 	protected void manageRow(String[] rowsValues){
 		Id id = new Id(Integer.valueOf(rowsValues[0]));
-		String position = rowsValues[1];
+		Position position = null;
+		try {
+			position = (Position) Class.forName(rowsValues[1]).newInstance();
+		} catch (InstantiationException e) {} 
+		  catch (IllegalAccessException e) {}
+		  catch (ClassNotFoundException e) {}
 		Integer goals = Integer.valueOf(rowsValues[2]);
 
 		UpdateManager.getInstance().addUncheckedPlayer(id, position, goals);

@@ -28,10 +28,10 @@ public class UpdateManager {
 		updates = new ArrayList<Update>();
 	}
 
-	private void checkInfo(Id id, String position) throws InvalidUpdateDataException {		
+	private void checkInfo(Id id, Position position) throws InvalidUpdateDataException {		
 		if (!PlayerHome.getInstance().existIdentifier(id))
 			throw new NoPlayerWithIdException(id);
-		if (PlayerHome.getInstance().get(id).getPosition() != Position.instance(position)){	
+		if (PlayerHome.getInstance().get(id).getPosition() != position){	
 			throw new InvalidPositionForPlayerWithIdException(position, id);
 		}
 	}
@@ -61,14 +61,14 @@ public class UpdateManager {
 		return instance;
 	}
 	
-	public void addUncheckedPlayer(Id id, String position, Integer goals) {
+	public void addUncheckedPlayer(Id id, Position position, Integer goals) {
 		try{
 			checkInfo(id,position);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		
-		checkedPlayers.add(new ProtoPlayer(id,position,goals));
+		checkedPlayers.add(new ProtoPlayer(id,goals));
 	}
 	
 	public void update(){

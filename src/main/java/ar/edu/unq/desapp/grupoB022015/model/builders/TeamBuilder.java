@@ -23,9 +23,7 @@ public class TeamBuilder {
 		for(int i = 0; i < x; i++){
 			try {
 				team.addPlayer(PlayerBuilder.anyPlayer().goalkeeper().build());
-			} catch (CantAddPlayerException e) {
-				e.printStackTrace();
-			}
+			} catch (CantAddPlayerException e) {}
 		}
 		return this;
 	}
@@ -34,9 +32,7 @@ public class TeamBuilder {
 		for(int i = 0; i < x; i++){
 			try {
 				team.addPlayer(PlayerBuilder.anyPlayer().defender().build());
-			} catch (CantAddPlayerException e) {
-				e.printStackTrace();
-			}
+			} catch (CantAddPlayerException e) {}
 		}
 		return this;
 	}
@@ -45,9 +41,7 @@ public class TeamBuilder {
 		for(int i = 0; i < x; i++){
 			try {
 				team.addPlayer(PlayerBuilder.anyPlayer().midfielder().build());
-			} catch (CantAddPlayerException e) {
-				e.printStackTrace();
-			}
+			} catch (CantAddPlayerException e) {}
 		}
 		return this;
 	}
@@ -56,9 +50,7 @@ public class TeamBuilder {
 		for(int i = 0; i < x; i++){
 			try {
 				team.addPlayer(PlayerBuilder.anyPlayer().forward().build());
-			} catch (CantAddPlayerException e) {
-				e.printStackTrace();
-			}
+			} catch (CantAddPlayerException e) {}
 		}
 		return this;
 	}
