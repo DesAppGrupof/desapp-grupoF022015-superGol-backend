@@ -3,6 +3,7 @@ package update.csvReaders;
 import org.joda.time.DateTime;
 
 import ar.edu.unq.desapp.grupoB022015.model.Id;
+import ar.edu.unq.desapp.grupoB022015.model.exceptions.InvalidUpdateDataException;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Position;
 import update.Update;
 import update.UpdateManager;
@@ -41,8 +42,13 @@ public class UpdateCSVReader extends CSVReader {
 		  catch (IllegalAccessException e) {}
 		  catch (ClassNotFoundException e) {}
 		Integer goals = Integer.valueOf(rowsValues[2]);
-
-		UpdateManager.getInstance().addUncheckedPlayer(id, position, goals);
+		
+		try{
+			UpdateManager.getInstance().addUncheckedPlayer(id, position, goals);
+		}catch(InvalidUpdateDataException e){
+			UpdateManager.getInstance().cancelUpdate(version);
+		}
+		
 		
 	}	
 

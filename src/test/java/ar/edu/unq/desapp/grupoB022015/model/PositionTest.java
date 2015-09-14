@@ -45,5 +45,4 @@ public class PositionTest extends TestCase{
 		assertTrue(forward.pointsFor(1) == 1);
 	}
 	
-	
 }

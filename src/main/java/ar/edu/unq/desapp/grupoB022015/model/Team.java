@@ -11,6 +11,10 @@ public class Team extends Persistible{
 	private Players	players;
 	private Integer roundPoints = 0;
 		
+	public void setPlayers(Players players) {
+		this.players = players;
+	}
+	
 	//------------------- Public interface -------------------\\
 	
 	public Team(){
@@ -34,6 +38,10 @@ public class Team extends Persistible{
 		roundPoints = roundPoints + points;
 	}
 	
+	public Integer getRoundPoints() {
+		return roundPoints;
+	}
+
 	public void resetRoundPoints(){
 		roundPoints = 0;
 	}

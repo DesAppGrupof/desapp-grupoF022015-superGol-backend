@@ -1,4 +1,4 @@
-package ar.edu.unq.desapp.grupoB022015.persistance;
+package persistance;
 
 import static org.mockito.Mockito.mock;
 

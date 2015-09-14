@@ -2,6 +2,7 @@ package ar.edu.unq.desapp.grupoB022015.model;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import ar.edu.unq.desapp.grupoB022015.model.positions.Defender;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Forward;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Goalkeeper;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Midfielder;
+import ar.edu.unq.desapp.grupoB022015.model.positions.Position;
 import junit.framework.TestCase;
 
 public class PlayerTest extends TestCase{
@@ -183,5 +185,25 @@ public class PlayerTest extends TestCase{
 		defender.setGoalsInLastRound(1);
 		
 		assertTrue(defender.averagePointsForRound() == 6);
+	}
+	
+	@Test
+	public void test_getGoalsInLastRound(){
+		Player player = PlayerBuilder.anyPlayer().build();		
+		Position position = mock(Position.class);
+		when(position.pointsFor(3)).thenReturn(3);
+		player.setPosition(position);
+		
+		player.setGoalsInLastRound(3);
+		
+		assertTrue (3 == player.getGoalsInLastRound());
+	}
+	
+	@Test
+	public void test_name(){
+		Player player = PlayerBuilder.anyPlayer().build();
+		player.setName("name");
+		
+		assertEquals("name", player.getName());
 	}
 }

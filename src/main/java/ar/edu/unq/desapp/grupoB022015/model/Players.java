@@ -13,7 +13,7 @@ public class Players {
 	
 	private List<Player> players;
 	
-	private void verifyIfCanAddPlayerWithThisPosition_And_ThrowExceptionIfNot(Position searchedPosition) throws CantAddPlayerException {
+	private void verifyIfCanAddPlayerWithPosition(Position searchedPosition) throws CantAddPlayerException {
 		if(players.size() == 11)
 			throw new NotAllowedMoreThanElevenPlayersException();
 		
@@ -33,7 +33,7 @@ public class Players {
 	}
 	
 	public void addPlayer(Player aPlayer) throws CantAddPlayerException {
-		verifyIfCanAddPlayerWithThisPosition_And_ThrowExceptionIfNot(aPlayer.getPosition());
+		verifyIfCanAddPlayerWithPosition(aPlayer.getPosition());
 		players.add(aPlayer);
 	}
 	

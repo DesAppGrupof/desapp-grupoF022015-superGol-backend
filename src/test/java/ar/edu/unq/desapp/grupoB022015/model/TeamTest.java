@@ -1,7 +1,7 @@
 package ar.edu.unq.desapp.grupoB022015.model;
 
 import org.junit.Test;
-
+import static org.mockito.Mockito.*;
 import ar.edu.unq.desapp.grupoB022015.model.Team;
 import ar.edu.unq.desapp.grupoB022015.model.builders.PlayerBuilder;
 import ar.edu.unq.desapp.grupoB022015.model.builders.TeamBuilder;
@@ -17,7 +17,7 @@ public class TeamTest extends TestCase{
 
 		
 	@Test
-	public void test_allPlayers_returnsAllPlayersInTheTeam(){
+	public void test_allPlayers_returnsAllPlayersInTeam(){
 		Team team = TeamBuilder.anyTeam().withllPlayersAllowed().build();
 		
 		assertEquals(team.allPlayers().size(), 11);
@@ -77,6 +77,41 @@ public class TeamTest extends TestCase{
 		} catch (CantAddPlayerException e) {
 			assertEquals(e.getClass(), NotAllowedMoreThanThreeForwardsException.class);
 		}	
+	}
+	
+	@Test
+	public void test_remove(){
+		Team team = TeamBuilder.anyTeam().build();
+		Player player = mock(Player.class);
+		Players players = mock(Players.class);
+		team.setPlayers(players);
+		
+		team.removePlayer(player);
+		
+		verify(players).removePlayer(player);
+	}
+	
+	@Test
+	public void test_addPlayerPoints(){
+		Team team = TeamBuilder.anyTeam().build();
+		team.addPlayerPoints(1);
+		team.addPlayerPoints(2);
+		team.addPlayerPoints(3);
+		
+		assertTrue(6 == team.getRoundPoints());
+	}
+	
+	@Test
+	public void test_resetRoundPoints(){
+		Team team = TeamBuilder.anyTeam().build();
+		
+		team.addPlayerPoints(1);
+		team.addPlayerPoints(2);
+		team.addPlayerPoints(3);		
+		assertTrue(6 == team.getRoundPoints());
+		
+		team.resetRoundPoints();		
+		assertTrue(0 == team.getRoundPoints());
 	}
 	
 }
