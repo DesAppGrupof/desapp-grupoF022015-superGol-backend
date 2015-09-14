@@ -17,6 +17,7 @@ public class PlayerHomeTest extends TestCase{
 
 	@Test
 	public void test_save(){
+		PlayerHome.getInstance().reset();
 		Player aPlayer = PlayerBuilder.anyPlayer().build();
 		PlayerHome.getInstance().save(aPlayer);
 		
