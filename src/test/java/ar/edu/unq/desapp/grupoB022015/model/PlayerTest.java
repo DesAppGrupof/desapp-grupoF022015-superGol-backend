@@ -148,12 +148,40 @@ public class PlayerTest extends TestCase{
 	
 	@Test
 	public void test_pointsInSeason(){
-		Player defender = PlayerBuilder.anyPlayer().defender().build(); 	// I take a defender becouse i love them
+		Player defender = PlayerBuilder.anyPlayer().defender().build(); 	// I choose a defender becouse i love them
 		
 		defender.setGoalsInLastRound(3);
 		defender.setGoalsInLastRound(2);
 		defender.setGoalsInLastRound(1);
 		
 		assertTrue(defender.pointsInSeason() == 18);
+	}
+	
+	@Test
+	public void test_pointsInLastThreeRounds(){
+		Player player = PlayerBuilder.anyPlayer().defender().build();
+
+		player.setGoalsInLastRound(3);
+		assertTrue(player.pointsInLastThreeRounds() == 9);
+
+		player.setGoalsInLastRound(1);
+		assertTrue(player.pointsInLastThreeRounds() == 12);
+		
+		player.setGoalsInLastRound(3);
+		assertTrue(player.pointsInLastThreeRounds() == 21);
+		
+		player.setGoalsInLastRound(3);
+		assertTrue(player.pointsInLastThreeRounds() == 21);
+	}
+	
+	@Test
+	public void test_averagePointsForRound(){
+		Player defender = PlayerBuilder.anyPlayer().defender().build();
+		
+		defender.setGoalsInLastRound(3);
+		defender.setGoalsInLastRound(2);
+		defender.setGoalsInLastRound(1);
+		
+		assertTrue(defender.averagePointsForRound() == 6);
 	}
 }

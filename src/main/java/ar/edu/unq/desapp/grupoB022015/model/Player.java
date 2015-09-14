@@ -20,6 +20,10 @@ public class Player extends Persistible{
 			t.addPlayerPoints(pointsByRound.get(pointsByRound.size() - 1));
 	}
 	
+	private Integer totalMatchPlayed(){
+		return pointsByRound.size();
+	}
+	
 	//------------------- Public interface -------------------\\
 
 	public String getName(){
@@ -68,7 +72,23 @@ public class Player extends Persistible{
 		return pointsInSeason;
 	}
 	
+	public Integer pointsInLastThreeRounds(){
+		Integer points = 0;
+		if(pointsByRound.size() >= 3)
+			points = pointsByRound.get(pointsByRound.size() -1) + 
+					 pointsByRound.get(pointsByRound.size() -2)	+
+					 pointsByRound.get(pointsByRound.size() -3);
+		if(pointsByRound.size() == 2)
+			points = pointsByRound.get(1) + pointsByRound.get(0);
+		if(pointsByRound.size() == 1)
+			points = pointsByRound.get(0);
+		return points;
+	}
 	
+	public Double averagePointsForRound(){
+		return (double) (pointsInSeason() / totalMatchPlayed());
+	}
+		
 	//------------------- Equals -------------------\\
 	
 	@Override

@@ -6,7 +6,11 @@ public final class Id {
 
 	public Id(Integer aNumber){
 		number = aNumber;
-	}
+	}	
+
+	public Integer number() {
+		return number;
+	}	
 	
 	//------------------- Equals -------------------\\
 	
@@ -27,7 +31,4 @@ public final class Id {
 		return true;
 	}
 
-	public Integer number() {
-		return number;
-	}	
 }
