@@ -14,7 +14,7 @@ public class ProtoPlayer {
 	}
 
 	public void updateReferencedPlayer() {
-		PlayerHome.getInstance().get(id).setGoalsInRound(goals);		
+		PlayerHome.getInstance().get(id).setGoalsInLastRound(goals);		
 	}
 
 }

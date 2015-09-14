@@ -4,7 +4,7 @@ import ar.edu.unq.desapp.grupoB022015.model.Id;
 import ar.edu.unq.desapp.grupoB022015.model.Player;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Defender;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Forward;
-import ar.edu.unq.desapp.grupoB022015.model.positions.GoalKeeper;
+import ar.edu.unq.desapp.grupoB022015.model.positions.Goalkeeper;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Midfielder;
 
 public class PlayerBuilder{
@@ -22,7 +22,7 @@ public class PlayerBuilder{
 	}
 		
 	public PlayerBuilder goalkeeper(){
-		player.setPosition(new GoalKeeper());
+		player.setPosition(new Goalkeeper());
 		return this;
 	}
 	

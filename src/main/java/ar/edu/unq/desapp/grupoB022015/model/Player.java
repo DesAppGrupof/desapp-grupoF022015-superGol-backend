@@ -12,11 +12,12 @@ public class Player extends Persistible{
 	private String name;
 	private Position position;
 	private List<Team> teams = new ArrayList<Team>();
-	private Integer goalsInRound = 0;
+	private Integer goalsInLastRound = 0;
+	private List<Integer> pointsByRound = new ArrayList<Integer>();
 	
 	private void updateTeams(){
 		for(Team t : teams)
-			t.addPlayerPoints(position.pointsFor(goalsInRound));
+			t.addPlayerPoints(pointsByRound.get(pointsByRound.size() - 1));
 	}
 	
 	//------------------- Public interface -------------------\\
@@ -41,12 +42,13 @@ public class Player extends Persistible{
 		return position.equals(unaPosition);
 	}
 	
-	public Integer getGoalsInRound() {
-		return goalsInRound;
+	public Integer getGoalsInLastRound() {
+		return goalsInLastRound;
 	}
 
-	public void setGoalsInRound(Integer goalsInRound) {
-		this.goalsInRound = goalsInRound;
+	public void setGoalsInLastRound(Integer goalsInRound) {
+		this.goalsInLastRound = goalsInRound;
+		this.pointsByRound.add(position.pointsFor(goalsInLastRound));
 		updateTeams();
 	}
 
@@ -56,6 +58,14 @@ public class Player extends Persistible{
 
 	public void addTeam(Team aTeam){
 		teams.add(aTeam);
+	}
+	
+	public Integer pointsInSeason(){
+		Integer pointsInSeason = 0;
+		for(Integer points : pointsByRound){
+			pointsInSeason = pointsInSeason + points;
+		}
+		return pointsInSeason;
 	}
 	
 	

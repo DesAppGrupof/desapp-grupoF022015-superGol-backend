@@ -2,14 +2,14 @@ package ar.edu.unq.desapp.grupoB022015.model.positions;
 
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.NotAllowedMoreThanOneGoalkeeperException;
 
-public class GoalKeeper extends Position{
+public class Goalkeeper extends Position{
 	
 	//---------------------- Private ----------------------\\
 	
 	
 	//------------------- Public interface -------------------\\
 		
-	public GoalKeeper(){
+	public Goalkeeper(){
 		maxPlayersByTeam = 1;
 	}
 

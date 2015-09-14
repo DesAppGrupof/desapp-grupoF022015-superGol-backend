@@ -1,28 +1,30 @@
 package ar.edu.unq.desapp.grupoB022015.model;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Test;
 
 import ar.edu.unq.desapp.grupoB022015.model.builders.PlayerBuilder;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Defender;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Forward;
-import ar.edu.unq.desapp.grupoB022015.model.positions.GoalKeeper;
+import ar.edu.unq.desapp.grupoB022015.model.positions.Goalkeeper;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Midfielder;
 import junit.framework.TestCase;
-import static org.mockito.Mockito.*;
 
 public class PlayerTest extends TestCase{
 	
 	@Test
 	public void test_aPlayerHasAPosition(){
 		Player goalkeeper = PlayerBuilder.anyPlayer().goalkeeper().build();
-		assertEquals(goalkeeper.getPosition(), new GoalKeeper());
+		assertEquals(goalkeeper.getPosition(), new Goalkeeper());
 	}
 	
 	@Test
 	public void test_whenAskToAPlayerIfHeHasThePositionHeHas_returnTrue(){
 		
 		Player goalkeeper = PlayerBuilder.anyPlayer().goalkeeper().build();
-		assertTrue(goalkeeper.hasPosition(new GoalKeeper()));
+		assertTrue(goalkeeper.hasPosition(new Goalkeeper()));
 		
 		Player defender = PlayerBuilder.anyPlayer().defender().build();
 		assertTrue(defender.hasPosition(new Defender()));
@@ -75,11 +77,11 @@ public class PlayerTest extends TestCase{
 		goalkeeper.addTeam(team1);
 		goalkeeper.addTeam(team2);
 
-		goalkeeper.setGoalsInRound(0);
+		goalkeeper.setGoalsInLastRound(0);
 		verify(team1).addPlayerPoints(3);
 		verify(team2).addPlayerPoints(3);
 		
-		goalkeeper.setGoalsInRound(1);		
+		goalkeeper.setGoalsInLastRound(1);		
 		verify(team1).addPlayerPoints(0);
 		verify(team2).addPlayerPoints(0);
 	}
@@ -98,7 +100,7 @@ public class PlayerTest extends TestCase{
 		defender.addTeam(team1);
 		defender.addTeam(team2);
 
-		defender.setGoalsInRound(1);
+		defender.setGoalsInLastRound(1);
 
 		verify(team1).addPlayerPoints(3);
 		verify(team2).addPlayerPoints(3);
@@ -118,7 +120,7 @@ public class PlayerTest extends TestCase{
 		midfielder.addTeam(team1);
 		midfielder.addTeam(team2);
 
-		midfielder.setGoalsInRound(2);
+		midfielder.setGoalsInLastRound(2);
 
 		verify(team1).addPlayerPoints(2);
 		verify(team2).addPlayerPoints(2);
@@ -138,10 +140,20 @@ public class PlayerTest extends TestCase{
 		forward.addTeam(team1);
 		forward.addTeam(team2);
 
-		forward.setGoalsInRound(3);
+		forward.setGoalsInLastRound(3);
 
 		verify(team1).addPlayerPoints(3);
 		verify(team2).addPlayerPoints(3);
 	}
 	
+	@Test
+	public void test_pointsInSeason(){
+		Player defender = PlayerBuilder.anyPlayer().defender().build(); 	// I take a defender becouse i love them
+		
+		defender.setGoalsInLastRound(3);
+		defender.setGoalsInLastRound(2);
+		defender.setGoalsInLastRound(1);
+		
+		assertTrue(defender.pointsInSeason() == 18);
+	}
 }
