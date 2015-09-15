@@ -7,6 +7,7 @@ import ar.edu.unq.desapp.grupoB022015.model.Player;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Forward;
 import junit.framework.TestCase;
 import persistence.PlayerHome;
+import upload.ProtoPlayer;
 
 public class ProtoPlayerTest extends TestCase {
 	

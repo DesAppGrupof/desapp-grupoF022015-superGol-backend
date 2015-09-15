@@ -15,6 +15,7 @@ import ar.edu.unq.desapp.grupoB022015.model.positions.Defender;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Forward;
 import junit.framework.TestCase;
 import persistence.PlayerHome;
+import upload.UpdateManager;
 
 public class UpdateManagerTest extends TestCase {
 

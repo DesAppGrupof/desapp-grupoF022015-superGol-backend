@@ -1,12 +1,12 @@
-package update.csvReaders;
+package upload.csvReaders;
 
 import org.joda.time.DateTime;
 
 import ar.edu.unq.desapp.grupoB022015.model.Id;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.InvalidUpdateDataException;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Position;
-import update.Update;
-import update.UpdateManager;
+import upload.Update;
+import upload.UpdateManager;
 
 public class UpdateCSVReader extends CSVReader {
 

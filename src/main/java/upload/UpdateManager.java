@@ -1,4 +1,4 @@
-package update;
+package upload;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import ar.edu.unq.desapp.grupoB022015.model.exceptions.NoPlayerWithIdException;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Position;
 import persistence.PlayerHome;
 import persistence.TeamHome;
-import update.csvReaders.UpdateCSVReader;
+import upload.csvReaders.UpdateCSVReader;
 
 public class UpdateManager {
 
