@@ -13,6 +13,7 @@ public class Player extends Persistible{
 	private Position position;
 	private List<Team> teams = new ArrayList<Team>();
 	private List<Integer> pointsByRound = new ArrayList<Integer>();
+	private String realteam;
 	
 	private void updateTeams(){
 		for(Team t : teams)
@@ -81,8 +82,16 @@ public class Player extends Persistible{
 	
 	public Double averagePointsForRound(){
 		return (double) (pointsInSeason() / totalMatchPlayed());
-	}
+	}	
+
+	public void setRealTeam(String team) {
+		realteam = team;
+	}	
 		
+	public String getRealTeam() {
+		return realteam;
+	}
+	
 	//------------------- Equals -------------------\\
 	
 	@Override
@@ -102,5 +111,4 @@ public class Player extends Persistible{
 		return true;
 	}
 
-	
 }

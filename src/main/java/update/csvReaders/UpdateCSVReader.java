@@ -18,8 +18,7 @@ public class UpdateCSVReader extends CSVReader {
 	
 	@Override
 	protected String csvFileRoute() {
-		// TODO
-		return "..." + version.toString();
+		return rootPath + "\\UpdateCSVs\\update-v" + version.toString() + ".csv";
 	}
 
 	@Override
@@ -37,19 +36,17 @@ public class UpdateCSVReader extends CSVReader {
 		Id id = new Id(Integer.valueOf(rowsValues[0]));
 		Position position = null;
 		try {
-			position = (Position) Class.forName(rowsValues[1]).newInstance();
-		} catch (InstantiationException e) {} 
-		  catch (IllegalAccessException e) {}
-		  catch (ClassNotFoundException e) {}
+			position = Position.getPositionWithName(rowsValues[1]);
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e1) {
+			UpdateManager.getInstance().cancelUpdate();
+		}		
 		Integer goals = Integer.valueOf(rowsValues[2]);
 		
 		try{
 			UpdateManager.getInstance().addUncheckedPlayer(id, position, goals);
 		}catch(InvalidUpdateDataException e){
-			UpdateManager.getInstance().cancelUpdate(version);
-		}
-		
-		
+			UpdateManager.getInstance().cancelUpdate();
+		}		
 	}
 
 	@Override

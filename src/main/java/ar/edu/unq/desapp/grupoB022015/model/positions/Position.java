@@ -9,6 +9,9 @@ public abstract class Position {
 	protected Integer maxPlayersByTeam;	
 	protected Integer goalsRatio;
 
+	public static Position getPositionWithName(String name) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
+		return (Position) Class.forName(name).newInstance();
+	}
 	
 	//------------------- Public interface -------------------\\
 	

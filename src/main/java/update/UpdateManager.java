@@ -6,6 +6,7 @@ import java.util.List;
 
 import ar.edu.unq.desapp.grupoB022015.model.Id;
 import ar.edu.unq.desapp.grupoB022015.model.Team;
+import ar.edu.unq.desapp.grupoB022015.model.exceptions.CanceledUpdate;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.InvalidPositionForPlayerWithIdException;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.InvalidUpdateDataException;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.NoPlayerWithIdException;
@@ -68,6 +69,14 @@ public class UpdateManager {
 		return instance;
 	}
 	
+	public void update() throws IOException, CanceledUpdate{
+		preUpdateActions();		
+		new UpdateCSVReader(nextUpdate).readFile();	
+		if(!continueUpdate) throw new CanceledUpdate();
+		updateRoundGoalsForAllPlayers();		
+		updates.add(newUpdate);
+	}
+	
 	public void setNewUpdate(Update newestUpdate){
 		newUpdate = newestUpdate;
 	}
@@ -76,16 +85,10 @@ public class UpdateManager {
 		checkInfo(id,position);		
 		checkedPlayers.add(new ProtoPlayer(id,goals));
 	}
-	
-	public void update() throws IOException{
-		preUpdateActions();		
-		new UpdateCSVReader(nextUpdate).readFile();				
-		updateRoundGoalsForAllPlayers();		
-		updates.add(newUpdate);
-	}
 
-	public void cancelUpdate(Integer version) {
+	public void cancelUpdate() {
 		continueUpdate = false;
+		nextUpdate--;
 	}
 
 	public boolean continueUpdate() {
