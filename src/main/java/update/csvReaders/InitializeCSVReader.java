@@ -14,7 +14,6 @@ public class InitializeCSVReader extends CSVReader{
 	
 	@Override
 	protected void manageRow(String[] rowsValues) {
-		// TODO Auto-generated method stub
 		
 	}
 
