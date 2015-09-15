@@ -16,7 +16,7 @@ public class Goalkeeper extends Position{
 	@Override
 	public Integer pointsFor(Integer goals){
 		if (goals == 0)
-			return 3;
+			return 2;
 		else
 			return 0;
 	}

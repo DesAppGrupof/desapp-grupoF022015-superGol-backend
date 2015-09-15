@@ -80,8 +80,8 @@ public class PlayerTest extends TestCase{
 		goalkeeper.addTeam(team2);
 
 		goalkeeper.setGoalsInLastRound(0);
-		verify(team1).addPlayerPoints(3);
-		verify(team2).addPlayerPoints(3);
+		verify(team1).addPlayerPoints(2);
+		verify(team2).addPlayerPoints(2);
 		
 		goalkeeper.setGoalsInLastRound(1);		
 		verify(team1).addPlayerPoints(0);

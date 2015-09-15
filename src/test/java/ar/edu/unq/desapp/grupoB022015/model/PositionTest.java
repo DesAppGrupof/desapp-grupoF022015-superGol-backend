@@ -14,7 +14,7 @@ public class PositionTest extends TestCase{
 	public void test_Goalkeeper_pointsFor_0_Goals(){
 		Goalkeeper goalkeeper = new Goalkeeper();
 		
-		assertTrue(goalkeeper.pointsFor(0) == 3);
+		assertTrue(goalkeeper.pointsFor(0) == 2);
 	}
 	
 	@Test
