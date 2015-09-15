@@ -12,7 +12,6 @@ public class Player extends Persistible{
 	private String name;
 	private Position position;
 	private List<Team> teams = new ArrayList<Team>();
-	private Integer goalsInLastRound = 0;
 	private List<Integer> pointsByRound = new ArrayList<Integer>();
 	
 	private void updateTeams(){
@@ -45,14 +44,9 @@ public class Player extends Persistible{
 	public boolean hasPosition(Position unaPosition) {
 		return position.equals(unaPosition);
 	}
-	
-	public Integer getGoalsInLastRound() {
-		return goalsInLastRound;
-	}
 
 	public void setGoalsInLastRound(Integer goalsInRound) {
-		this.goalsInLastRound = goalsInRound;
-		this.pointsByRound.add(position.pointsFor(goalsInLastRound));
+		this.pointsByRound.add(position.pointsFor(goalsInRound));
 		updateTeams();
 	}
 
