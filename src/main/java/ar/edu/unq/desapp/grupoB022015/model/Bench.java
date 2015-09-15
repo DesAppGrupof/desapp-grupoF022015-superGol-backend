@@ -7,7 +7,7 @@ import ar.edu.unq.desapp.grupoB022015.model.exceptions.CantAddPlayerException;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.NotAllowedMoreThanElevenPlayersException;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Position;
 
-public class Players {
+public class Bench {
 
 	//---------------------- Private ----------------------\\
 	
@@ -28,7 +28,7 @@ public class Players {
 	
 	//------------------- Public interface -------------------\\
 	
-	public Players(){
+	public Bench(){
 		players = new ArrayList<Player>();
 	}
 	

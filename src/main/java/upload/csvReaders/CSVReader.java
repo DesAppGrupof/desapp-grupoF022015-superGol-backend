@@ -6,10 +6,10 @@ import java.io.IOException;
 
 public abstract class CSVReader {
 	
-	String rootPath = "src\\main\\resources\\CSVs";
+	String rootPath = "src\\main\\resources\\CSVs\\";
 	BufferedReader reader;
 	String line;
-	String valuesDivision = ",";
+	String valuesDivision = ";";
 
 	public void readFile() throws IOException{
 		reader = new BufferedReader(new FileReader(csvFileRoute()));

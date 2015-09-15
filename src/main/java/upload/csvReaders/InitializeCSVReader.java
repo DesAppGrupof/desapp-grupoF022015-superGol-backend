@@ -12,7 +12,7 @@ public class InitializeCSVReader extends CSVReader{
 	
 	@Override
 	protected String csvFileRoute() {
-		return rootPath + "initializeCSV.csv";
+		return rootPath + "initializePlayers.csv";
 	}
 
 	@Override

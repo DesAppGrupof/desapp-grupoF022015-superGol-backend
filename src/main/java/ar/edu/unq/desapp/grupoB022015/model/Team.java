@@ -9,18 +9,18 @@ public class Team extends Persistible{
 
 	//---------------------- Private ----------------------\\
 	
-	private Players	players;
+	private Bench	bench;
 	private Integer roundPoints = 0;
 	private Player captain;	
 	
-	public void setPlayers(Players players) {
-		this.players = players;
+	public void setPlayers(Bench bench) {
+		this.bench = bench;
 	}
 	
 	//------------------- Public interface -------------------\\
 
 	public Team(){
-		players = new Players();
+		bench = new Bench();
 	}
 	
 	public Player getCaptain() {
@@ -28,22 +28,22 @@ public class Team extends Persistible{
 	}
 
 	public void setCaptain(Player newCaptain) throws CaptainMustBeATeamsPlayerException  {
-		if (!players.contains(newCaptain))
+		if (!bench.contains(newCaptain))
 			throw new CaptainMustBeATeamsPlayerException();
 		this.captain = newCaptain;
 	}
 	
 	public void addPlayer(Player aPlayer) throws CantAddPlayerException {
-		players.addPlayer(aPlayer);
+		bench.addPlayer(aPlayer);
 		aPlayer.addTeam(this);
 	}
 	
 	public void removePlayer(Player aPlayer){
-		players.removePlayer(aPlayer);
+		bench.removePlayer(aPlayer);
 	}
 
 	public List<Player> allPlayers() {
-		return players.all();
+		return bench.all();
 	}
 	
 	public void addPlayerPoints(Integer points){

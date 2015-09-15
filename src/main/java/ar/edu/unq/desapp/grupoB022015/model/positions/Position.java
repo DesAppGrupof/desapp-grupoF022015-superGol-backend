@@ -23,7 +23,6 @@ public abstract class Position {
 		return goals * goalsRatio;
 	}
 	
-	
 	public abstract void throwCantAddPlayerException()  throws CantAddPlayerException;	
 	
 	@Override

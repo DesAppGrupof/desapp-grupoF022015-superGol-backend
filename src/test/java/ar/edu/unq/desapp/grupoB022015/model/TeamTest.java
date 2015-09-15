@@ -89,12 +89,12 @@ public class TeamTest extends TestCase{
 	public void test_remove(){
 		Team team = TeamBuilder.anyTeam().build();
 		Player player = mock(Player.class);
-		Players players = mock(Players.class);
-		team.setPlayers(players);
+		Bench bench = mock(Bench.class);
+		team.setPlayers(bench);
 		
 		team.removePlayer(player);
 		
-		verify(players).removePlayer(player);
+		verify(bench).removePlayer(player);
 	}
 	
 	@Test

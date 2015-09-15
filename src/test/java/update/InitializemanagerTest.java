@@ -1,5 +1,7 @@
 package update;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import ar.edu.unq.desapp.grupoB022015.model.Id;
@@ -26,4 +28,13 @@ public class InitializemanagerTest extends TestCase{
 		assertFalse(PlayerHome.getInstance().existIdentifier(new Id(0)));
 	}
 
+	@Test
+	public void test_initializeSystem(){
+		try {
+			new InitializeManager().run();
+			assertTrue(true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }
