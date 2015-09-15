@@ -45,13 +45,4 @@ public class PositionTest extends TestCase{
 		assertTrue(forward.pointsFor(1) == 1);
 	}
 	
-	@Test
-	public void test_isPosition(){
-		assertTrue(new Defender().isPosition("Defender"));
-		assertTrue(new Forward().isPosition("Forward"));
-		assertTrue(new Goalkeeper().isPosition("Goalkeeper"));
-		assertTrue(new Midfielder().isPosition("Midfielder"));
-	}
-	
-	
 }

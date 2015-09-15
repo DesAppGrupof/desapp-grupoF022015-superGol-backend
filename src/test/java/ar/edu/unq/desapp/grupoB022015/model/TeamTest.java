@@ -1,16 +1,22 @@
 package ar.edu.unq.desapp.grupoB022015.model;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Test;
-import static org.mockito.Mockito.*;
-import ar.edu.unq.desapp.grupoB022015.model.Team;
+
 import ar.edu.unq.desapp.grupoB022015.model.builders.PlayerBuilder;
 import ar.edu.unq.desapp.grupoB022015.model.builders.TeamBuilder;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.CantAddPlayerException;
+import ar.edu.unq.desapp.grupoB022015.model.exceptions.CaptainMustBeATeamsPlayerException;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.NotAllowedMoreThanElevenPlayersException;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.NotAllowedMoreThanFourMidfieldersException;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.NotAllowedMoreThanOneGoalkeeperException;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.NotAllowedMoreThanThreeDefendersException;
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.NotAllowedMoreThanThreeForwardsException;
+import ar.edu.unq.desapp.grupoB022015.model.positions.Goalkeeper;
+import ar.edu.unq.desapp.grupoB022015.model.positions.Position;
 import junit.framework.TestCase;
 
 public class TeamTest extends TestCase{
@@ -112,6 +118,39 @@ public class TeamTest extends TestCase{
 		
 		team.resetRoundPoints();		
 		assertTrue(0 == team.getRoundPoints());
+	}
+	
+	@Test
+	public void test_setCaptain_positive(){
+		Team team = TeamBuilder.anyTeam().build();
+		Player player = mock(Player.class);
+		Position position = mock(Goalkeeper.class);
+		when(player.getPosition()).thenReturn(position);
+		try{
+			team.addPlayer(player);
+		}catch(Exception e){
+			fail();
+		}
+		
+		try{
+			team.setCaptain(player);
+			assertTrue(team.getCaptain().equals(player));
+		}catch (Exception e){
+			fail();
+		}
+	}
+	
+	@Test
+	public void test_whenTryToSetACaptainThatIsntInTheTeam_throwsException(){
+		Team team = TeamBuilder.anyTeam().build();
+		Player player = mock(Player.class);
+				
+		try{
+			team.setCaptain(player);
+			fail();
+		}catch (CaptainMustBeATeamsPlayerException e){
+			assertTrue(true);
+		}
 	}
 	
 }

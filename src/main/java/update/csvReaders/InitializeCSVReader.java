@@ -4,8 +4,7 @@ public class InitializeCSVReader extends CSVReader{
 
 	@Override
 	protected String csvFileRoute() {
-		// TODO Auto-generated method stub
-		return "";
+		return rootPath + "initializeCSV.csv";
 	}
 
 	@Override
@@ -17,5 +16,11 @@ public class InitializeCSVReader extends CSVReader{
 	protected void manageRow(String[] rowsValues) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	protected boolean customCondition() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

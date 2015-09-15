@@ -1,5 +1,6 @@
 package update;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class UpdateManager {
 	private static UpdateManager instance;
 	private Integer nextUpdate;
 	private List<ProtoPlayer> checkedPlayers;
-	
+	private boolean continueUpdate = true;
+	public Update newUpdate;	
+	public List<Update> updates;	
 	
 	private UpdateManager(){
 		nextUpdate = 0;
@@ -50,10 +53,14 @@ public class UpdateManager {
 		checkedPlayers.clear();
 	}
 	
+	private void preUpdateActions() {
+		resetTeamsRoundPoints();
+		continueUpdate = true;
+		nextUpdate++;
+	}
+	
 	//------------------- Public interface -------------------\\
 
-	public List<Update> updates;
-	public Update newUpdate;
 	
 	public static UpdateManager getInstance(){
 		if(instance == null)
@@ -61,25 +68,32 @@ public class UpdateManager {
 		return instance;
 	}
 	
+	public void setNewUpdate(Update newestUpdate){
+		newUpdate = newestUpdate;
+	}
+	
 	public void addUncheckedPlayer(Id id, Position position, Integer goals) throws InvalidUpdateDataException {
-		checkInfo(id,position);
-		
+		checkInfo(id,position);		
 		checkedPlayers.add(new ProtoPlayer(id,goals));
 	}
 	
-	public void update(){
-		resetTeamsRoundPoints();
-		
-		new UpdateCSVReader(nextUpdate).readFile();
-		nextUpdate++;
-				
-		updateRoundGoalsForAllPlayers();
-		
+	public void update() throws IOException{
+		preUpdateActions();		
+		new UpdateCSVReader(nextUpdate).readFile();				
+		updateRoundGoalsForAllPlayers();		
 		updates.add(newUpdate);
 	}
 
 	public void cancelUpdate(Integer version) {
-		
+		continueUpdate = false;
+	}
+
+	public boolean continueUpdate() {
+		return continueUpdate;
+	}
+	
+	public List<Update> updates(){
+		return updates;
 	}
 	
 }

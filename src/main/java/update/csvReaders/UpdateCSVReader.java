@@ -29,7 +29,7 @@ public class UpdateCSVReader extends CSVReader {
 		update.updateNumber = version;
 		update.updateDate = DateTime.now();
 		
-		UpdateManager.getInstance().newUpdate = update;
+		UpdateManager.getInstance().setNewUpdate(update);
 	}
 
 	@Override
@@ -50,6 +50,11 @@ public class UpdateCSVReader extends CSVReader {
 		}
 		
 		
+	}
+
+	@Override
+	protected boolean customCondition() {
+		return UpdateManager.getInstance().continueUpdate();
 	}	
 
 }

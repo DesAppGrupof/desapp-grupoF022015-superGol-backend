@@ -3,6 +3,7 @@ package ar.edu.unq.desapp.grupoB022015.model;
 import java.util.List;
 
 import ar.edu.unq.desapp.grupoB022015.model.exceptions.CantAddPlayerException;
+import ar.edu.unq.desapp.grupoB022015.model.exceptions.CaptainMustBeATeamsPlayerException;
 
 public class Team extends Persistible{
 
@@ -10,15 +11,26 @@ public class Team extends Persistible{
 	
 	private Players	players;
 	private Integer roundPoints = 0;
-		
+	private Player captain;	
+	
 	public void setPlayers(Players players) {
 		this.players = players;
 	}
 	
 	//------------------- Public interface -------------------\\
-	
+
 	public Team(){
 		players = new Players();
+	}
+	
+	public Player getCaptain() {
+		return captain;
+	}
+
+	public void setCaptain(Player newCaptain) throws CaptainMustBeATeamsPlayerException  {
+		if (!players.contains(newCaptain))
+			throw new CaptainMustBeATeamsPlayerException();
+		this.captain = newCaptain;
 	}
 	
 	public void addPlayer(Player aPlayer) throws CantAddPlayerException {

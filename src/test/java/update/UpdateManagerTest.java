@@ -3,6 +3,8 @@ package update;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.File;
+
 import org.junit.Test;
 
 import ar.edu.unq.desapp.grupoB022015.model.Id;
@@ -58,5 +60,12 @@ public class UpdateManagerTest extends TestCase {
 		}catch(Exception e){
 			assertTrue(false);
 		}
+	}
+	
+	@Test
+	public void test_path(){
+		File appBase = new File("."); 
+		String path = appBase.getAbsolutePath(); 
+		System.out.println(path); 
 	}
 }
