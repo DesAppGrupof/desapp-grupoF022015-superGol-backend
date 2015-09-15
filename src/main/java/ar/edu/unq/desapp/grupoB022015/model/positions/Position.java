@@ -31,5 +31,9 @@ public abstract class Position {
 			return false;
 		return true;
 	}
-
+	
+	public boolean isPosition(String position) {
+		return getClass().getSimpleName().equals(position);
+	}
+	
 }
