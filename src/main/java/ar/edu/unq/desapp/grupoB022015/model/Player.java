@@ -25,23 +25,6 @@ public class Player extends Persistible{
 	}
 	
 	//------------------- Public interface -------------------\\
-
-	public String getName(){
-		return name;
-	}
-	
-	public void setName(String aName){
-		name = aName;
-	}
-	
-	public Position getPosition() {
-		return position;
-	}
-
-	public void setPosition(Position position) {
-		this.position = position;
-	}
-
 	public boolean hasPosition(Position unaPosition) {
 		return position.equals(unaPosition);
 	}
@@ -49,10 +32,6 @@ public class Player extends Persistible{
 	public void setGoalsInLastRound(Integer goalsInRound) {
 		this.pointsByRound.add(position.pointsFor(goalsInRound));
 		updateTeams();
-	}
-
-	public List<Team> getTeams() {
-		return teams;
 	}
 
 	public void addTeam(Team aTeam){
@@ -83,6 +62,26 @@ public class Player extends Persistible{
 	public Double averagePointsForRound(){
 		return (double) (pointsInSeason() / totalMatchPlayed());
 	}	
+
+	public String getName(){
+		return name;
+	}
+	
+	public void setName(String aName){
+		name = aName;
+	}
+	
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
 
 	public void setRealTeam(String team) {
 		realteam = team;
