@@ -10,7 +10,7 @@ public abstract class Position {
 	protected Integer goalsRatio;
 
 	public static Position getPositionWithName(String name) throws InstantiationException, IllegalAccessException, ClassNotFoundException{
-		return (Position) Class.forName(name).newInstance();
+		return (Position) Class.forName("ar.edu.unq.desapp.grupoB022015.model.positions."+ name).newInstance();
 	}
 	
 	//------------------- Public interface -------------------\\

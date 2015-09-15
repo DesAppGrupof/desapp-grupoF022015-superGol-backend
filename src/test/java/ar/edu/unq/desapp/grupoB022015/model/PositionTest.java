@@ -6,6 +6,7 @@ import ar.edu.unq.desapp.grupoB022015.model.positions.Defender;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Forward;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Goalkeeper;
 import ar.edu.unq.desapp.grupoB022015.model.positions.Midfielder;
+import ar.edu.unq.desapp.grupoB022015.model.positions.Position;
 import junit.framework.TestCase;
 
 public class PositionTest extends TestCase{
@@ -43,6 +44,19 @@ public class PositionTest extends TestCase{
 		Forward forward = new Forward();
 		
 		assertTrue(forward.pointsFor(1) == 1);
+	}
+	
+	@Test
+	public void test_getPositionWithName_Goalkeeper(){	
+		try {
+			assertTrue(new Goalkeeper().equals(Position.getPositionWithName("Goalkeeper")));
+		} catch (InstantiationException e) {
+			fail("it's spell");
+		} catch (IllegalAccessException e) {
+			fail("it's name");
+		} catch (ClassNotFoundException e) {
+			fail("it's class");
+		}
 	}
 	
 }
