@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<title>Super Gol</title>
+<link href="css/angular-bootstrap.css" rel="stylesheet">
+<style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+</style>
+</head>
+
+<body ng-app="hello" ng-controller="home">
+  <div class="container">
+    <button class="btn btn-primary" ngclick="addLeague()">Crear Liga</button>
+    <button class="btn btn-primary" ngclick="modifyLeague()">Modificar Liga</button>
+    <button class="btn btn-primary" ngclick="createTeam()">Crear Equipo</button>
+    <button class="btn btn-primary" ngclick="modifyTeam()">Modificar Equipo</button>
+    <button class="btn btn-primary" ngclick="updateRound()">Actualizar Fecha</button>
+    <button class="btn btn-primary" ngclick="getRanking()">Ranking</button>
+<!--     <h1>Greeting</h1> -->
+<!--     <div ng-controller="home" ng-cloak class="ng-cloak"> -->
+<!--       <p>The ID is {{greeting.id}}</p> -->
+<!--       <p>The content is {{greeting.content}}</p> -->
+<!--     </div> -->
+  </div>
+<!--   <a href="leagueCreation">Crear Liga</a> -->
+<!--   <div ng-view></div> -->
+
+<div ng-cloak class="ng-cloak">
+<div>
+<form ng-submit="addLeague()" ng-show="showCreateLeague" 
+style="margin-top:30px;" class="form-inline">
+<h3>Agregar nueva liga</h3>
+	<div class="form-group">
+      <label>Nombre{{data.leagues}}</label>
+      <input type="text"
+        class="form-control"
+        placeholder="nombre"
+        ng-model="name"></input>
+    </div>
+    <button type="submit" id="createbtn" class="btn btn-primary" style="margin-top: 25px;">Crear</button>
+</form>
+</div>
+</div>
+  
+  <script src="js/angular-bootstrap.js" type="text/javascript"></script>
+  <script src="js/hello.js"></script>
+</body>
+</html>
